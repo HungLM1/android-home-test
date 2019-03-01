@@ -12,42 +12,41 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.und.R;
-import com.und.adapter.CategoriseAdapter.Holder.CatogoriesHolder;
+import com.und.adapter.CategoriseAdapter.Holder.CategoriesHolder;
 import com.und.adapter.KeywordAdapter.KeywordAdapter;
 import com.und.models.CatagoriesModel;
 
 import java.util.ArrayList;
 
-public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
+public class CategoriseAdapter extends RecyclerView.Adapter<CategoriesHolder> {
 
     private Context mContext;
 
     private ArrayList<CatagoriesModel> mDataList;
 
-    protected ArrayList<RecyclerView> mRecyclerViews;
+    protected ArrayList<RecyclerView> mContentViews;
 
     public CategoriseAdapter(Context context, ArrayList<CatagoriesModel> dataList) {
         this.mDataList = dataList;
         this.mContext = context;
 
-        mRecyclerViews = new ArrayList<>();
+        mContentViews = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public CatogoriesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CategoriesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_item, null);
 
-        CatogoriesHolder mh = new CatogoriesHolder(mContext, v);
+        CategoriesHolder mh = new CategoriesHolder(mContext, v);
 
         return mh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CatogoriesHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoriesHolder holder, int position) {
 
         final String sectionName = mDataList.get(position).getHeaderTitle();
 
@@ -61,7 +60,7 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
 
         holder.setAdapter(KeywordAdapter);
 
-        mRecyclerViews.add(holder.getContenView());
+        mContentViews.add(holder.getContentView());
     }
 
     public void smoothScrollToPosition(int pos) {
@@ -73,7 +72,7 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
             @Override
             public void run() {
 
-                mRecyclerViews.get(0).smoothScrollToPosition(pos);
+                mContentViews.get(0).smoothScrollToPosition(pos);
 
             }}, 1000);
     }
@@ -85,7 +84,7 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
 
     public int getAdapterItemCount (int viewIndex ) {
 
-        return mRecyclerViews.get(viewIndex).getAdapter().getItemCount();
+        return mContentViews.get(viewIndex).getAdapter().getItemCount();
     }
 
 }

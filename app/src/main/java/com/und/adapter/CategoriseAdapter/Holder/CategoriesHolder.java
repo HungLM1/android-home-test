@@ -16,7 +16,7 @@ import butterknife.BindView;
  * Created by hungle on 01/03/2019.
  */
 
-public class CatogoriesHolder extends uBaseViewHolder<CategoriseEventListener> {
+public class CategoriesHolder extends uBaseViewHolder<CategoriseEventListener> {
 
     /* the title property*/
     @BindView(R.id.itemTitle)
@@ -30,7 +30,7 @@ public class CatogoriesHolder extends uBaseViewHolder<CategoriseEventListener> {
     @BindView(R.id.btnMore)
     Button mButtonMore;
 
-    public CatogoriesHolder(Context ctx, View view) {
+    public CategoriesHolder(Context ctx, View view) {
         super(ctx, view);
     }
 
@@ -46,7 +46,7 @@ public class CatogoriesHolder extends uBaseViewHolder<CategoriseEventListener> {
         mRecyclerViews.setAdapter(adapter);
     }
 
-    public RecyclerView getContenView () {
+    public RecyclerView getContentView() {
         return this.mRecyclerViews;
     }
 }
