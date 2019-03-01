@@ -147,10 +147,7 @@ public abstract class uBaseActivity<P extends BasePresenter> extends AppCompatAc
             intent.putExtras(bundle);
         }
         startActivity(intent);
-
         finish();
     }
-
-
 }
 

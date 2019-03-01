@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.und.R;
-import com.und.adapter.Listenner.KeywordEventListener;
+import com.und.adapter.EventListener.KeywordEventListener;
 import com.und.core.Layout.common.uBaseViewHolder;
 
 import butterknife.BindView;

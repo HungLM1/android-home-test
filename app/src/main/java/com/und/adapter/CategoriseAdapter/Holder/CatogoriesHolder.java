@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.und.R;
-import com.und.adapter.Listenner.CategoriseEventListener;
+import com.und.adapter.EventListener.CategoriseEventListener;
 import com.und.core.Layout.common.uBaseViewHolder;
 
 import butterknife.BindView;
