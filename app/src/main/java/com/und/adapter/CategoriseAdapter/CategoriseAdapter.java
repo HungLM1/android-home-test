@@ -73,6 +73,7 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
     }
 
     public void smoothScrollToPosition(int pos) {
+
         final Handler handler = new Handler();
 
         //100ms wait to scroll to item after applying changes
@@ -88,6 +89,11 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
     @Override
     public int getItemCount() {
         return (null != mDataList ? mDataList.size() : 0);
+    }
+
+    public int getAdapterItemCount (int viewIndex ) {
+
+        return mRecyclerViews.get(viewIndex).getAdapter().getItemCount();
     }
 
 }

@@ -1,16 +1,23 @@
 package com.und.view.activity;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
 import com.und.core.Layout.activity.uBaseActivity;
 import com.und.models.KeyworkModel;
 import com.und.adapter.CategoriseAdapter.CategoriseAdapter;
 import com.und.R;
 import com.und.models.CatagoriesModel;
+import com.und.utils.manager.ottobus.OttoBusManager;
+import com.und.utils.manager.ottobus.model.JobModel;
+import com.und.utils.manager.scheduler.JobScheduler;
 
 import java.util.ArrayList;
 
@@ -22,10 +29,11 @@ import butterknife.BindView;
 
 public class MainActivity extends uBaseActivity<MainPresenter> implements MainContract.View {
 
-    private TextView textView;
-    private ProgressBar progressBar;
+    private TextView mTextView;
+    private ProgressBar mProgressBar;
+    private CategoriseAdapter mAdapter;
 
-    ArrayList<CatagoriesModel> allSampleData;
+    private ArrayList<CatagoriesModel> mKeywords;
 
     @Nullable
     @BindView(R.id.my_recycler_view)
@@ -43,13 +51,78 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
     }
 
     @Override
-    public void showProgress() {
+    public void onLoad() {
+
+        /* start scheduler service */
+        startService(new Intent(this, JobScheduler.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+         /* add notification bus */
+        OttoBusManager.getInstance().unRegister(this);
+    }
+
+    @Override
+    public void onCreateView() {
+
+        mKeywords = new ArrayList<CatagoriesModel>();
+
+        createDummyData();
+
+        my_recycler_view.setHasFixedSize(true);
+
+        mAdapter = new CategoriseAdapter(this, mKeywords);
+
+        my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        my_recycler_view.setAdapter(mAdapter);
+
+        /* add notification bus */
+        OttoBusManager.getInstance().register(this);
+    }
+
+    @Override
+    public int layout() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void hideLoadingView() {
 
     }
 
     @Override
-    public void hideProgress() {
+    public void showLoadingView() {
 
+    }
+
+    /**
+     * onReceiveNotifycation()
+     * notify when to download finished
+     *
+     * @param downloadNotification
+     * The information of download
+     *
+     * @return none
+     */
+    @Subscribe
+    public void onReceiveNotification(JobModel downloadNotification) {
+
+        mPresenter.onChangeKeywordPosition(mAdapter.getAdapterItemCount(0), 0);
+    }
+
+    @Override
+    public void onChangeKeywordPosition(int pos) {
+
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.smoothScrollToPosition(pos);
+            }
+        });
     }
 
     public void createDummyData() {
@@ -67,44 +140,8 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
 
             dm.setAllItemsInSection(singleItem);
 
-            allSampleData.add(dm);
+            mKeywords.add(dm);
 
         }
-    }
-
-    @Override
-    public void onLoad() {
-
-    }
-
-    @Override
-    public void onCreateView() {
-
-        allSampleData = new ArrayList<CatagoriesModel>();
-
-        createDummyData();
-
-        my_recycler_view.setHasFixedSize(true);
-
-        CategoriseAdapter adapter = new CategoriseAdapter(this, allSampleData);
-
-        my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        my_recycler_view.setAdapter(adapter);
-    }
-
-    @Override
-    public int layout() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
-
-    @Override
-    public void showLoadingView() {
-
     }
 }

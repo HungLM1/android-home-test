@@ -10,12 +10,14 @@ import com.und.core.Layout.activity.uBaseActivity;
 
 public interface MainContract {
     interface View extends IBaseView {
-        void showProgress();
 
-        void hideProgress();
+        void onChangeKeywordPosition(int pos);
     }
 
     interface Presenter{
+
         void onDestroy();
+
+        void onChangeKeywordPosition(int itemCount, int index);
     }
 }
