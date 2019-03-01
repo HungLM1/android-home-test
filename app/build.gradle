@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
+    defaultConfig {
+        applicationId "com.und"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true  // ALSO IMPORTANT
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "Boolean", "DEBUG_MODE", "true"
+            resValue  "string", "api_key", "AIzaSyBmJMSsc_jj4-bc4iULkXn6hFRDEJLWDbc"
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue  "string", "api_key", "AIzaSyDHZtuMyk6SQaCZp704s52jw_T_S2IZXEw"
+        }
+    }
+    dexOptions {
+        incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:recyclerview-v7:27.1.1'
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.1.0'
+    annotationProcessor "com.google.dagger:dagger-compiler:2.9"
+
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+
+    implementation 'com.jakewharton:butterknife:8.1.0'
+    implementation 'com.google.dagger:dagger:2.9'
+
+    testCompile 'junit:junit:4.12'
+}
