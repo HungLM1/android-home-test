@@ -68,14 +68,14 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
 
         final Handler handler = new Handler();
 
-        //100ms wait to scroll to item after applying changes
+        //1000ms wait to scroll to item after applying changes
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 mRecyclerViews.get(0).smoothScrollToPosition(pos);
 
-            }}, 100);
+            }}, 1000);
     }
 
     @Override

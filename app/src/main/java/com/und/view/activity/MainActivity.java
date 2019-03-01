@@ -76,10 +76,10 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
 
     /**
      * onReceiveNotification()
-     * notify when to download finished
+     * notify when to time for change display
      *
      * @param Notification
-     * The information of download
+     * The information of need to me change display
      *
      * @return none
      */
@@ -134,6 +134,8 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
         OttoBusManager.getInstance().unRegister(this);
     }
 
+
+    /* this code for temporary will be change */
     public void createDummyData() {
 
         for (int i = 1; i <= 1; i++) {
