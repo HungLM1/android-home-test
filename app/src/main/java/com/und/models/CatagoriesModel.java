@@ -12,13 +12,13 @@ public class CatagoriesModel {
 
 
     private String headerTitle;
-    private ArrayList<KeyworkModel> allItemsInSection;
+    private ArrayList<KeywordModel> allItemsInSection;
 
 
     public CatagoriesModel() {
 
     }
-    public CatagoriesModel(String headerTitle, ArrayList<KeyworkModel> allItemsInSection) {
+    public CatagoriesModel(String headerTitle, ArrayList<KeywordModel> allItemsInSection) {
         this.headerTitle = headerTitle;
         this.allItemsInSection = allItemsInSection;
     }
@@ -33,11 +33,11 @@ public class CatagoriesModel {
         this.headerTitle = headerTitle;
     }
 
-    public ArrayList<KeyworkModel> getAllItemsInSection() {
+    public ArrayList<KeywordModel> getAllItemsInSection() {
         return allItemsInSection;
     }
 
-    public void setAllItemsInSection(ArrayList<KeyworkModel> allItemsInSection) {
+    public void setAllItemsInSection(ArrayList<KeywordModel> allItemsInSection) {
         this.allItemsInSection = allItemsInSection;
     }
 }

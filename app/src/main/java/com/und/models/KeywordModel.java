@@ -4,17 +4,17 @@ package com.und.models;
  * Created by hungle on 01/03/2019.
  */
 
-public class KeyworkModel {
+public class KeywordModel {
 
     private String name;
     private String url;
     private String description;
 
 
-    public KeyworkModel() {
+    public KeywordModel() {
     }
 
-    public KeyworkModel(String name, String url) {
+    public KeywordModel(String name, String url) {
         this.name = name;
         this.url = url;
     }

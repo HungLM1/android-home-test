@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 import com.und.core.Layout.activity.uBaseActivity;
-import com.und.models.KeyworkModel;
+import com.und.models.KeywordModel;
 import com.und.adapter.CategoriseAdapter.CategoriseAdapter;
 import com.und.R;
 import com.und.models.CatagoriesModel;
@@ -142,9 +142,9 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
 
             dm.setHeaderTitle("Section " + i);
 
-            ArrayList<KeyworkModel> singleItem = new ArrayList<KeyworkModel>();
+            ArrayList<KeywordModel> singleItem = new ArrayList<KeywordModel>();
             for (int j = 0; j <= 20; j++) {
-                singleItem.add(new KeyworkModel("Item " + j, "URL " + j));
+                singleItem.add(new KeywordModel("Item " + j, "URL " + j));
             }
 
             dm.setAllItemsInSection(singleItem);

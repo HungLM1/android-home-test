@@ -5,7 +5,6 @@ package com.und.adapter.KeywordAdapter;
  */
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,17 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.und.adapter.KeywordAdapter.Holder.KeywordHolder;
-import com.und.models.KeyworkModel;
+import com.und.models.KeywordModel;
 import com.und.R;
 
 import java.util.ArrayList;
 
 public class KeywordAdapter extends RecyclerView.Adapter<KeywordHolder> {
 
-    private ArrayList<KeyworkModel> mItemsList;
     private Context mContext;
+    private ArrayList<KeywordModel> mItemsList;
 
-    public KeywordAdapter(Context context, ArrayList<KeyworkModel> itemsList) {
+    public KeywordAdapter(Context context, ArrayList<KeywordModel> itemsList) {
         this.mItemsList = itemsList;
         this.mContext = context;
     }
@@ -40,9 +39,9 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordHolder> {
     @Override
     public void onBindViewHolder(@NonNull KeywordHolder holder, int position) {
 
-        KeyworkModel singleItem = mItemsList.get(position);
+        KeywordModel keywordItem = mItemsList.get(position);
 
-        holder.tvTitle.setText(singleItem.getName());
+        holder.setTitle(keywordItem.getName());
 
     }
 

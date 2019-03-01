@@ -10,27 +10,32 @@ import com.und.R;
 import com.und.adapter.Listenner.KeywordEventListener;
 import com.und.core.Layout.common.uBaseViewHolder;
 
+import butterknife.BindView;
+
 /**
  * Created by hungle on 01/03/2019.
  */
 
 public class KeywordHolder extends uBaseViewHolder<KeywordEventListener> {
 
-    public TextView tvTitle;
+    @BindView(R.id.tvTitle)
+    TextView mTitle;
 
-    public ImageView itemImage;
+    @BindView(R.id.itemImage)
+    ImageView mItemImage;
 
     public KeywordHolder(Context ctx, View view) {
         super(ctx, view);
 
-        this.tvTitle = (TextView) view.findViewById(R.id.tvTitle);
-        this.itemImage = (ImageView) view.findViewById(R.id.itemImage);
-
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), mTitle.getText(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void setTitle (String title) {
+        mTitle.setText(title);
     }
 }
