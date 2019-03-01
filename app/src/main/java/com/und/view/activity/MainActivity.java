@@ -40,11 +40,6 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
     RecyclerView my_recycler_view;
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void initializePresenter(uBaseActivity activity) {
         mPresenter = new MainPresenter(this);
         mPresenter.setView(this);
@@ -53,16 +48,6 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
     @Override
     public void onLoad() {
 
-        /* start scheduler service */
-        startService(new Intent(this, JobScheduler.class));
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-         /* add notification bus */
-        OttoBusManager.getInstance().unRegister(this);
     }
 
     @Override
@@ -89,27 +74,17 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
         return R.layout.activity_main;
     }
 
-    @Override
-    public void hideLoadingView() {
-
-    }
-
-    @Override
-    public void showLoadingView() {
-
-    }
-
     /**
-     * onReceiveNotifycation()
+     * onReceiveNotification()
      * notify when to download finished
      *
-     * @param downloadNotification
+     * @param Notification
      * The information of download
      *
      * @return none
      */
     @Subscribe
-    public void onReceiveNotification(JobModel downloadNotification) {
+    public void onReceiveNotification(JobModel Notification) {
 
         mPresenter.onChangeKeywordPosition(mAdapter.getAdapterItemCount(0), 0);
     }
@@ -123,6 +98,40 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
                 mAdapter.smoothScrollToPosition(pos);
             }
         });
+    }
+
+    @Override
+    public void hideLoadingView() {
+
+    }
+
+    @Override
+    public void showLoadingView() {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        /* start scheduler service */
+        startService(new Intent(this, JobScheduler.class));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        /* stop scheduler service */
+        startService(new Intent(this, JobScheduler.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+         /* add notification bus */
+        OttoBusManager.getInstance().unRegister(this);
     }
 
     public void createDummyData() {
@@ -141,7 +150,6 @@ public class MainActivity extends uBaseActivity<MainPresenter> implements MainCo
             dm.setAllItemsInSection(singleItem);
 
             mKeywords.add(dm);
-
         }
     }
 }

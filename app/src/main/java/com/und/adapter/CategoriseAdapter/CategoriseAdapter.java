@@ -51,25 +51,17 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
 
         final String sectionName = mDataList.get(position).getHeaderTitle();
 
-        ArrayList singleSectionItems = mDataList.get(position).getAllItemsInSection();
+        ArrayList sectionItems = mDataList.get(position).getAllItemsInSection();
 
-        holder.itemTitle.setText(sectionName);
+        holder.setItemTitle(sectionName);
 
-        KeywordAdapter hRecyclerViewAdapter = new KeywordAdapter(mContext, singleSectionItems);
+        KeywordAdapter KeywordAdapter = new KeywordAdapter(mContext, sectionItems);
 
-        holder.mRecyclerViews.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-        holder.mRecyclerViews.setAdapter(hRecyclerViewAdapter);
+        holder.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
 
-        mRecyclerViews.add(holder.mRecyclerViews);
+        holder.setAdapter(KeywordAdapter);
 
-
-        holder.btnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(v.getContext(), "click event on more, "+sectionName , Toast.LENGTH_SHORT).show();
-            }
-        });
+        mRecyclerViews.add(holder.getContenView());
     }
 
     public void smoothScrollToPosition(int pos) {
@@ -83,7 +75,7 @@ public class CategoriseAdapter extends RecyclerView.Adapter<CatogoriesHolder> {
 
                 mRecyclerViews.get(0).smoothScrollToPosition(pos);
 
-            }}, 1000);
+            }}, 100);
     }
 
     @Override

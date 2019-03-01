@@ -10,23 +10,43 @@ import com.und.R;
 import com.und.adapter.Listenner.CategoriseEventListener;
 import com.und.core.Layout.common.uBaseViewHolder;
 
+import butterknife.BindView;
+
 /**
  * Created by hungle on 01/03/2019.
  */
 
 public class CatogoriesHolder extends uBaseViewHolder<CategoriseEventListener> {
 
-    public TextView itemTitle;
+    /* the title property*/
+    @BindView(R.id.itemTitle)
+    TextView mItemTitle;
 
-    public RecyclerView mRecyclerViews;
+    /* the view property*/
+    @BindView(R.id.recycler_view_list)
+    RecyclerView mRecyclerViews;
 
-    public Button btnMore;
+    /* the button property*/
+    @BindView(R.id.btnMore)
+    Button mButtonMore;
 
     public CatogoriesHolder(Context ctx, View view) {
         super(ctx, view);
+    }
 
-        this.itemTitle = (TextView) view.findViewById(R.id.itemTitle);
-        this.mRecyclerViews = (RecyclerView) view.findViewById(R.id.recycler_view_list);
-        this.btnMore= (Button) view.findViewById(R.id.btnMore);
+    public void setItemTitle(String title) {
+        this.mItemTitle.setText(title);
+    }
+
+    public void setLayoutManager(RecyclerView.LayoutManager layout) {
+        this.mRecyclerViews.setLayoutManager(layout);
+    }
+
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        mRecyclerViews.setAdapter(adapter);
+    }
+
+    public RecyclerView getContenView () {
+        return this.mRecyclerViews;
     }
 }

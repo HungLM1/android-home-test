@@ -33,6 +33,7 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordHolder> {
     public KeywordHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_single_card, null);
         KeywordHolder mh = new KeywordHolder(mContext, v);
+
         return mh;
     }
 
